@@ -1,4 +1,5 @@
 using Gefangenendilemma.Basis;
+using System;
 
 namespace Gefangenendilemma
 {
@@ -13,13 +14,15 @@ namespace Gefangenendilemma
     public class Strategie1 : BasisStrategie
     {
 
+        private bool Mittel = false;
+
         /// <summary>
         /// Gibt den Namen der Strategie zurück, wichtig zum Anzeigen für die Auswahl
         /// </summary>
         /// <returns></returns>
         public override string Name()
         {
-            return "Bitte anpassen";
+            return "reverse TFTT/TFT";
         }
 
         /// <summary>
@@ -28,7 +31,7 @@ namespace Gefangenendilemma
         /// <returns></returns>
         public override string Autor()
         {
-            return "Bitte anpassen";
+            return "Felix Lerch";
         }
 
         /// <summary>
@@ -38,7 +41,8 @@ namespace Gefangenendilemma
         /// <param name="schwere">Schwere des Verbrechen (VLeicht = 0, VMittel = 1, VSchwer = 2)</param>
         public override void Start(int runde, int schwere)
         {
-            //Vorbereitungen für Start
+            if (schwere == 1) Mittel = true;
+            else Mittel = false;
         }
 
         /// <summary>
@@ -48,9 +52,18 @@ namespace Gefangenendilemma
         /// <returns>Gibt die eigene Reaktion für diese Runde zurück (Kooperieren = 0, Verrat = 1)</returns>
         public override int Verhoer(int letzteReaktion)
         {
-            //Strategie hier ergänzen
-
-            return Verrat;
+            //Kooperiere immer
+            if (Mittel)
+            {
+                if (letzteReaktion == NochNichtVerhoert) return Verrat;
+                else if (letzteReaktion == Verrat) return new Random().Next(0, 2);
+                else return letzteReaktion;
+            }
+            else
+            {
+                if (letzteReaktion == NochNichtVerhoert) return Verrat;
+                else return letzteReaktion;
+            }
         }
     }
 }
