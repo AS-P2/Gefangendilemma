@@ -19,7 +19,7 @@ namespace Gefangenendilemma
         /// <returns></returns>
         public override string Autor()
         {
-            return "Bitte anpassen";
+            return "Nicolas Marks";
         }
 
         /// <summary>

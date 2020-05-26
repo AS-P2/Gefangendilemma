@@ -42,7 +42,7 @@ namespace Gefangenendilemma
                     case "0":
                         Gefangene2();
                         break;
-                    case "X":
+                    case "X":                                                   //unerreichbar, wenn vorher .ToLower()
                         break;
                     default:
                         Console.WriteLine($"Eingabe {eingabe} nicht erkannt.");
