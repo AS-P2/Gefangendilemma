@@ -10,7 +10,7 @@ namespace Gefangenendilemma
         /// <returns></returns>
         public override string Name()
         {
-            return "Bitte anpassen";
+            return "Secret Tactic";
         }
 
         /// <summary>
