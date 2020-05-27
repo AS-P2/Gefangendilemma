@@ -25,7 +25,7 @@ namespace Gefangenendilemma
             _strategien = new List<BasisStrategie>();
             _strategien.Add(new GrollStrategie());
             _strategien.Add(new VerrateImmerStrategie());
-            _strategien.Add(new Strategie1());
+            _strategien.Add(new StrategieTFTT_TFT());
             _strategien.Add(new Strategie2());
             _strategien.Add(new Strategie3());
             
@@ -94,10 +94,10 @@ namespace Gefangenendilemma
         /// <summary>
         /// Startet ein Verhör zwischen der Strategie an der Position st1 und Position st2 über die Länge von runde und der Schwere schwere
         /// </summary>
-        /// <param name="st1"></param>
-        /// <param name="st2"></param>
-        /// <param name="runde"></param>
-        /// <param name="schwere"></param>
+        /// <param name="st1">Angabe der 1. Strategie</param>
+        /// <param name="st2">Angabe der 2. Strategie</param>
+        /// <param name="runde">Anzahl der Runden die verhört wird</param>
+        /// <param name="schwere">Schwere des Verbrechens</param>
         static void Verhoer(int st1, int st2, int runde, int schwere)
         {
             //holt die beiden Strategien aus der Collection.
@@ -160,7 +160,7 @@ namespace Gefangenendilemma
         }
 
         /// <summary>
-        /// Fragt gegnerische Strategie, Länge, Schwere und Spielername ab.
+        /// Fragt gegnerische Strategie, Länge, Schwere und Spielername ab und startet den Verhör.
         /// </summary>
         static void PlayerVsStrategie ()
         {
@@ -194,10 +194,10 @@ namespace Gefangenendilemma
         /// <summary>
         /// Startet ein Verhör zwischen der Strategie an der Position st und einem Spieler über die Länge von runde und der Schwere schwere
         /// </summary>
-        /// <param name="st"></param>
-        /// <param name="runde"></param>
-        /// <param name="schwere"></param>
-        /// <param name="spieler"></param>
+        /// <param name="st">Angabe der gegnerischen Strategie</param>
+        /// <param name="runde">Anzahl der Runden die verhört wird</param>
+        /// <param name="schwere">Schwere des Verbrechens</param>
+        /// <param name="spieler"> Gibt den Spielernamen an</param>
         static void PlayerVerhoer (int st, int runde, int schwere, string spieler)
         {
             //Strategie festlegen

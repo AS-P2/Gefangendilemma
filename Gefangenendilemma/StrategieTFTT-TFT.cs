@@ -11,7 +11,7 @@ namespace Gefangenendilemma
     /// 3. Schreiben Sie in Verhoer() ihre Strategie, über die Start() Methode erhalten Sie allgemeine Informationen zum Durchlauf. 
     /// Sie können gerne weitere Methoden, Variablen ergänzen, aber passen Sie nicht das 
     /// </summary>
-    public class Strategie1 : BasisStrategie
+    public class StrategieTFTT_TFT : BasisStrategie
     {
 
         private bool Mittel = false;
@@ -52,13 +52,14 @@ namespace Gefangenendilemma
         /// <returns>Gibt die eigene Reaktion für diese Runde zurück (Kooperieren = 0, Verrat = 1)</returns>
         public override int Verhoer(int letzteReaktion)
         {
-            //Kooperiere immer
+            //Wenn Mittel, benutze reverse TFTT
             if (Mittel)
             {
                 if (letzteReaktion == NochNichtVerhoert) return Verrat;
                 else if (letzteReaktion == Verrat) return new Random().Next(0, 2);
                 else return letzteReaktion;
             }
+            //Wenn Leicht oder Mittel, benutze reverse TFT
             else
             {
                 if (letzteReaktion == NochNichtVerhoert) return Verrat;
