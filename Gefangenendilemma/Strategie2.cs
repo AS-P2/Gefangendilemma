@@ -18,7 +18,7 @@ namespace Gefangenendilemma
 
         public override string Name()
         {
-            return "Secret Tactic";
+            return "Niggos Geheimtaktik";
         }
 
         /// <summary>
@@ -136,9 +136,19 @@ namespace Gefangenendilemma
                 {
                     // sinnvolle Logik?
                 }
-                for (int i = 0; i <= rounds; i++)
+            }
+            if (middle && rounds == 100)
+            {
+                if (dieserunde == 1)
                 {
-
+                    return Kooperieren;
+                }
+                else
+                {
+                    if (letzteReaktion == Verrat)
+                    {
+                        nurnochkooperieren = true;
+                    }
                 }
             }
             return 0;
