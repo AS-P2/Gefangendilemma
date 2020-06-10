@@ -150,6 +150,7 @@ namespace Gefangenendilemma
             //ausgabe
             Console.WriteLine($"\n{strategie1.Name()} hat {punkte1} Punkte erhalten.");
             Console.WriteLine($"{strategie2.Name()} hat {punkte2} Punkte erhalten.\n");
+            Strategie2.setrundezero();
             if (punkte1 < punkte2)
             {
                 Console.WriteLine("Somit hat {0} gewonnen.", strategie1.Name());

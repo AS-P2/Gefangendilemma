@@ -14,9 +14,14 @@ namespace Gefangenendilemma
         private bool middle;
         private bool hard;
         private int rounds;
-        private int dieserunde;
+        static int dieserunde;
         private bool nurnochkooperieren;
 
+
+        public static void setrundezero()
+        {
+            dieserunde = 0;
+        }
         public override string Name()
         {
             return "Niggos Geheimtaktik";
@@ -65,175 +70,172 @@ namespace Gefangenendilemma
             {
                 return Kooperieren;
             }
-            if (easy && rounds == 5)                                    // gewinnt hiermit gegen Groll auf einfach
+            if (easy)                                    // gewinnt hiermit gegen Groll auf einfach
             {
-                if (dieserunde == 5)                                    // && letzteReaktion == Kooperieren
+                if (rounds == 5)
                 {
-                    return Verrat;
+                    if (dieserunde == 5)                                    // && letzteReaktion == Kooperieren
+                    {
+                        return Verrat;
+                    }
+                    if (letzteReaktion == NochNichtVerhoert)
+                    {
+                        return Kooperieren;
+                    }
+                    else if (letzteReaktion == Kooperieren)
+                    {
+                        return Kooperieren;
+                    }
+                    else if (letzteReaktion == Verrat)
+                    {
+                        return Verrat;
+                    }
                 }
-                if (letzteReaktion == NochNichtVerhoert)
-                {
-                    return Kooperieren;
-                }
-                else if (letzteReaktion == Kooperieren)
-                {
-                    return Kooperieren;
-                }
-                else if (letzteReaktion == Verrat)
-                {
-                    return Verrat;
-                }
-            }
-            else if (easy && rounds == 25)
-            {
-
-                if (dieserunde == 25)                                   // && letzteReaktion == Kooperieren
-                {
-                    return Verrat;
-                }
-                else
+                else if (rounds == 25)
                 {
 
+                    if (dieserunde == 25)
+                    {
+                        return Verrat;
+                    }
+                    else
+                    {
+
+                        if (dieserunde == 1)
+                        {
+                            return Verrat;
+                        }
+                        else
+                        {
+                            return letzteReaktion;
+                        }
+                    }
+                }
+                else if (rounds == 100)
+                {
                     if (dieserunde == 1)
                     {
-                        return Verrat;
+                        return Kooperieren;
                     }
                     else
                     {
-                        return letzteReaktion;
+                        if (dieserunde == 100)
+                        {
+                            return Verrat;
+                        }
+                        else
+                        {
+                            return Verrat;
+                        }
                     }
                 }
             }
-            else if (easy && rounds == 100)
+            else if (middle)
             {
-                if (dieserunde == 1)
+                if (rounds == 5)
                 {
-                    return Kooperieren;
+
+                    nurnochkooperieren = true;      //damit er nicht immer alle if's durchgehen muss
+
                 }
-                else
-                {
-                    if (dieserunde == 100)      //  && letzteReaktion == Kooperieren
-                    {
-                        return Verrat;
-                    }
-                    else
-                    {
-                        return Verrat;
-                    }
-                }
-            }
-            else if (middle && rounds == 5)
-            {
-                if (dieserunde == 5 && letzteReaktion == Verrat)
-                {
-                    return Verrat;
-                }
-                else
-                {
-                    return Kooperieren;
-                }
-            }
-            else if (middle && rounds == 25)
-            {
-                if (dieserunde == 1)
-                {
-                    return Kooperieren;
-                }
-                if (dieserunde >= 2 && letzteReaktion == Verrat)
+                else if (rounds == 25)
                 {
                     nurnochkooperieren = true;
                 }
-                else
+                else if (rounds == 100)                     //gewinnt gegen Groll
                 {
-                    //return NochNichtVerhoert;
-                }
-            }
-            else if (middle && rounds == 100)
-            {
-                if (letzteReaktion == Kooperieren)
-                {
-                    count++;
-                }
-                else
-                {
-                    count = 0;
-                }
-                if (count == 9)
-                {
-                    count = 0;
-                    return Verrat;
-                }
-                if (dieserunde == 1)
-                {
-                    return Kooperieren;
-                }
-                else
-                {
-                    if (letzteReaktion == Verrat)
+                    if (letzteReaktion == Kooperieren)
                     {
-                        nurnochkooperieren = true;
+                        count++;
+                    }
+                    else
+                    {
+                        count = 0;
+                    }
+                    if (count == 9)
+                    {
+                        count = 0;
+                        return Verrat;
+                    }
+                    if (dieserunde == 1)
+                    {
+                        return Kooperieren;
+                    }
+                    else
+                    {
+                        if (letzteReaktion == Verrat)
+                        {
+                            nurnochkooperieren = true;
+                        }
                     }
                 }
             }
-            else if (hard && rounds == 5)                               // gewinnt hiermit gegen Groll auf einfach
-            {
-                if (dieserunde == 5)                                    // && letzteReaktion == Kooperieren
-                {
-                    return Verrat;
-                }
-                if (letzteReaktion == NochNichtVerhoert)
-                {
-                    return Kooperieren;
-                }
-                else if (letzteReaktion == Kooperieren)
-                {
-                    return Kooperieren;
-                }
-                else if (letzteReaktion == Verrat)
-                {
 
-                    return Verrat;
-                }
-            }
-            else if (hard && rounds == 25)
-            {
 
-                if (dieserunde == 25)                                   // && letzteReaktion == Kooperieren
+
+
+
+            else if (hard)
+            {
+                if (rounds == 5)
                 {
-                    return Verrat;
+                    if (dieserunde == 1)
+                    {
+                        return Kooperieren;
+                    }
+                    else if (letzteReaktion == Kooperieren)
+                    {
+                        return Kooperieren;
+                    }
+                    else if (letzteReaktion == Verrat)
+                    {
+
+                        return Verrat;
+                    }
                 }
-                else
+                else if (rounds == 25)
                 {
 
                     if (dieserunde == 1)
                     {
-                        return Verrat;
+                        return Kooperieren;
                     }
                     else
                     {
-                        return letzteReaktion;
+
+                        if (dieserunde == 25)
+                        {
+                            return Verrat;
+                        }
+                        else
+                        {
+                            return letzteReaktion;
+                        }
                     }
                 }
-            }
-            else if (hard && rounds == 100)
-            {
-                if (dieserunde == 1)
+                else if (rounds == 100)
                 {
-                    return Kooperieren;
-                }
-                else
-                {
-                    if (dieserunde == 100)                              //  && letzteReaktion == Kooperieren
+                    if (dieserunde == 1)
                     {
-                        return Verrat;
+                        return Kooperieren;
                     }
                     else
                     {
-                        return Verrat;
+                        if (dieserunde == 100)
+                        {
+                            return Verrat;
+                        }
+                        else
+                        {
+                            return letzteReaktion;
+                        }
                     }
                 }
+
             }
-            return 0;
+
+
+            return Kooperieren;
         }
     }
 }
