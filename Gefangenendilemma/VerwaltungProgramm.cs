@@ -127,12 +127,18 @@ namespace Gefangenendilemma
                 {
                     case 0:
                         VerhoerLeichtPunkte(aktReaktion1,aktReaktion2,ref punkte1,ref punkte2);
+                        //Console.WriteLine(strategie1.Name() + " hat " + punkte1 + " Punkte, " + strategie2.Name() + " hat " + punkte2);
+                        //Console.ReadLine();
                         break;
                     case 1:
                         VerhoerMittelPunkte(aktReaktion1, aktReaktion2, ref punkte1, ref punkte2);
+                        //Console.WriteLine(strategie1.Name() + " hat " + punkte1 + " Punkte, " + strategie2.Name() + " hat " + punkte2);
+                        //Console.ReadLine();
                         break;
                     case 2:
                         VerhoerSchwerPunkte(aktReaktion1, aktReaktion2, ref punkte1, ref punkte2);
+                        //Console.WriteLine(strategie1.Name() + " hat " + punkte1 + " Punkte, " + strategie2.Name() + " hat " + punkte2);
+                        //Console.ReadLine();
                         break;
                 }
                 
@@ -144,6 +150,7 @@ namespace Gefangenendilemma
             //ausgabe
             Console.WriteLine($"\n{strategie1.Name()} hat {punkte1} Punkte erhalten.");
             Console.WriteLine($"{strategie2.Name()} hat {punkte2} Punkte erhalten.\n");
+            Strategie2.setrundezero();
             if (punkte1 < punkte2)
             {
                 Console.WriteLine("Somit hat {0} gewonnen.", strategie1.Name());
