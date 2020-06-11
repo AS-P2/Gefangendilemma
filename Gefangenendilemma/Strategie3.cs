@@ -8,7 +8,6 @@ namespace Gefangenendilemma
     /// Die Strategy basiert auf Ergebnissen von verschiedener Algorhitmen, die im Turniermodus getestet wurden.
     /// Bei kurzen Spielen bis zu fünf Runden wird auf Random zurückgegriffen.
     /// Ab sechs Runden aufwärst wird der Tit-for-Tat-Algorhitmus verwendet, mit der kleinen Modifikation, dass die letzte Runde immer ein Verrat ist.
-    /// An die Aufgabenstellung angepasst, wird Verrate-Immer umgedreht.
     /// </summary>
     public class Strategie3 : BasisStrategie
     {
