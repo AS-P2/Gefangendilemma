@@ -15,7 +15,7 @@ namespace Gefangenendilemma
         /// Diese Liste(Collection) enthält alle Gefangene/Strategien
         /// </summary>
         private static List<BasisStrategie> _strategien;
-        
+
         static void Main(string[] args)
         {
             //Spielstart
@@ -28,7 +28,7 @@ namespace Gefangenendilemma
             _strategien.Add(new StrategieTFTT());
             _strategien.Add(new Niggos_Geheimtaktik());
             _strategien.Add(new Strategie3());
-            
+
             string eingabe;
             do
             {
@@ -37,7 +37,7 @@ namespace Gefangenendilemma
                 Console.WriteLine("SvS - Verhör zwischen 2 Strategien");
                 Console.WriteLine("PvS - Verhör gegen eine Strategie");
                 Console.WriteLine("X - Beenden");
-                
+
                 // Eingabe
                 Console.Write("Treffen Sie ihre Option: ");
                 eingabe = Console.ReadLine();
@@ -70,8 +70,8 @@ namespace Gefangenendilemma
             catch (IOException e) { }
 
             int st1, st2;
-            int runde, schwere;
-            
+            int spiele;
+
             Console.WriteLine("Willkommen zum Verhör zwischen 2 Strategien\nStrategien:");
             for (int i = 0; i < _strategien.Count; i++)
             {
@@ -178,24 +178,6 @@ namespace Gefangenendilemma
                 reaktion2 = aktReaktion2;
             }
 
-        }
-
-        //ausgabe
-        Console.WriteLine($"\n{strategie1.Name()} hat {punkte1} Punkte erhalten.");
-            Console.WriteLine($"{strategie2.Name()} hat {punkte2} Punkte erhalten.\n");
-            if (punkte1 < punkte2)
-            {
-                Console.WriteLine("Somit hat {0} gewonnen.", strategie1.Name());
-            }
-            else if (punkte1 == punkte2)
-            {
-                Console.WriteLine("Somit steht es unentschieden.");
-            }
-            else
-            {
-                Console.WriteLine("Somit hat {0} gewonnen.", strategie2.Name());
-            }
-            
         }
 
         /// <summary>
