@@ -2,7 +2,7 @@ using Gefangenendilemma.Basis;
 
 namespace Gefangenendilemma
 {
-    public class Strategie2 : BasisStrategie
+    public class Niggos_Geheimtaktik : BasisStrategie
     {
         /// <summary>
         /// Gibt den Namen der Strategie zurück, wichtig zum Anzeigen für die Auswahl
@@ -10,18 +10,13 @@ namespace Gefangenendilemma
         /// <returns></returns>
         /// 
         int count = 0;
-        private bool easy;
-        private bool middle;
-        private bool hard;
-        private int rounds;
-        static int dieserunde;
-        private bool nurnochkooperieren;
+        private bool easy = false;
+        private bool middle = false;
+        private bool hard = false;
+        private int rounds = 0;
+        static int dieserunde = 0;
+        private bool nurnochkooperieren = false;
 
-
-        public static void setrundezero()
-        {
-            dieserunde = 0;
-        }
         public override string Name()
         {
             return "Niggos Geheimtaktik";
@@ -43,6 +38,7 @@ namespace Gefangenendilemma
         /// <param name="schwere">Schwere des Verbrechen (VLeicht = 0, VMittel = 1, VSchwer = 2)</param>
         public override void Start(int runde, int schwere)
         {
+            resetValues();
             if (schwere == 0)
             {
                 easy = true;
@@ -236,6 +232,16 @@ namespace Gefangenendilemma
 
 
             return Kooperieren;
+        }
+        private void resetValues()
+        {
+            count = 0;
+            easy = false;
+            middle = false;
+            hard = false;
+            rounds = 0;
+            dieserunde = 0;
+            nurnochkooperieren = false;
         }
     }
 }

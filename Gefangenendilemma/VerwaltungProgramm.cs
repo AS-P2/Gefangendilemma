@@ -26,7 +26,7 @@ namespace Gefangenendilemma
             _strategien.Add(new GrollStrategie());
             _strategien.Add(new VerrateImmerStrategie());
             _strategien.Add(new StrategieTFTT());
-            _strategien.Add(new Strategie2());
+            _strategien.Add(new Niggos_Geheimtaktik());
             _strategien.Add(new Strategie3());
             
             string eingabe;
@@ -150,7 +150,6 @@ namespace Gefangenendilemma
             //ausgabe
             Console.WriteLine($"\n{strategie1.Name()} hat {punkte1} Punkte erhalten.");
             Console.WriteLine($"{strategie2.Name()} hat {punkte2} Punkte erhalten.\n");
-            Strategie2.setrundezero();
             if (punkte1 < punkte2)
             {
                 Console.WriteLine("Somit hat {0} gewonnen.", strategie1.Name());
