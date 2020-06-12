@@ -13,7 +13,7 @@ namespace Gefangenendilemma
         /// Diese Liste(Collection) enthält alle Gefangene/Strategien
         /// </summary>
         private static List<BasisStrategie> _strategien;
-        
+
         static void Main(string[] args)
         {
             //bekannt machen der ganzen strategien
@@ -23,7 +23,7 @@ namespace Gefangenendilemma
             _strategien.Add(new Strategie1());
             _strategien.Add(new Strategie2());
             _strategien.Add(new Strategie3());
-            
+
             string eingabe;
             do
             {
@@ -31,7 +31,7 @@ namespace Gefangenendilemma
                 Console.WriteLine("Willkommen zum Gefangenendilemma");
                 Console.WriteLine("0 - Verhör zwischen 2 Strategien");
                 Console.WriteLine("X - Beenden");
-                
+
                 // Eingabe
                 Console.Write("Treffen Sie ihre Option: ");
                 eingabe = Console.ReadLine();
@@ -57,8 +57,8 @@ namespace Gefangenendilemma
         static void Gefangene2()
         {
             int st1, st2;
-            int runde, schwere;
-            
+            int spiele;
+
             Console.WriteLine("Willkommen zum Verhör zwischen 2 Strategien");
             for (int i = 0; i < _strategien.Count; i++)
             {
@@ -67,36 +67,78 @@ namespace Gefangenendilemma
             Console.WriteLine("Wählen Sie ihre 2 Strategien:");
             st1 = VerwaltungKram.EingabeZahlMinMax("Wählen Sie die 1. Strategie", 0, _strategien.Count);
             st2 = VerwaltungKram.EingabeZahlMinMax("Wählen Sie die 2. Strategie", 0, _strategien.Count);
-            runde = VerwaltungKram.EingabeZahlMinMax("Wie viele Runden sollen diese verhört werden?", 1, 101);
-            schwere = VerwaltungKram.EingabeZahlMinMax("Wie schwer sind die Verstöße? (0=leicht  | 1=mittel | 2=schwer)", 0, 3);
-            
-            Verhoer(st1, st2, runde, schwere);
+            spiele = VerwaltungKram.EingabeZahlMinMax("Wie Spiele sollen diese gespielt werden?", 1, 10);
+
+            for (int i = 0; i < spiele; ++i)
+                Spiel(i, st1, st2, i == spiele - 1);
+
+        }
+
+        /// <summary>
+        /// Startet ein Spiel mit neuer Wahl für Rundenanzahl und Schwere.
+        /// </summary>
+        /// <param name="spiel"></param>
+        /// <param name="st1"></param>
+        /// <param name="st2"></param>
+        /// <param name="lastGame"></param>
+        static void Spiel(int spiel, int st1, int st2, bool lastGame)
+        {
+
+            int punkte1 = 0, punkte2 = 0;
+
+            BasisStrategie strategie1 = _strategien[st1];
+            BasisStrategie strategie2 = _strategien[st2];
+
+
+            int runde = VerwaltungKram.EingabeZahlMinMax("Wie viele Runden sollen diese verhört werden?", 1, 101);
+            int schwere = VerwaltungKram.EingabeZahlMinMax("Wie schwer sind die Verstöße? (0=leicht  | 1=mittel | 2=schwer)", 0, 3);
+
+            Verhoer(spiel, ref strategie1, ref strategie2, runde, schwere, ref punkte1, ref punkte2);
+
+            //ausgabe
+            Console.WriteLine($"Spiel {spiel}:");
+            Console.WriteLine($"{strategie1.Name()} hat {punkte1} Punkte erhalten.");
+            Console.WriteLine($"{strategie2.Name()} hat {punkte2} Punkte erhalten.");
+
+            if (lastGame)
+                if (punkte1 < punkte2)
+                {
+                    Console.WriteLine("Somit hat {0} gewonnen.", strategie1.Name());
+                }
+                else if (punkte1 == punkte2)
+                {
+                    Console.WriteLine("Somit steht es unentschieden.");
+                }
+                else
+                {
+                    Console.WriteLine("Somit hat {0} gewonnen.", strategie2.Name());
+                }
         }
 
         /// <summary>
         /// Startet ein Verhör zwischen der Strategie an der Position st1 und Position st2 über die Länge von runde und der Schwere schwere
         /// </summary>
+        /// <param name="spiel"></param>
         /// <param name="st1"></param>
         /// <param name="st2"></param>
         /// <param name="runde"></param>
         /// <param name="schwere"></param>
-        static void Verhoer(int st1, int st2, int runde, int schwere)
+        /// <param name="punkte1"></param>
+        /// <param name="punkte2"></param>
+        static void Verhoer(int spiel, ref BasisStrategie strategie1, ref BasisStrategie strategie2, int runde, int schwere, ref int punkte1, ref int punkte2)
         {
             //holt die beiden Strategien aus der Collection.
-            BasisStrategie strategie1 = _strategien[st1];
-            BasisStrategie strategie2 = _strategien[st2];
 
             //setzt Startwerte
             int reaktion1 = BasisStrategie.NochNichtVerhoert;
             int reaktion2 = BasisStrategie.NochNichtVerhoert;
-            int punkte1 = 0, punkte2 = 0;
 
             //beide Strategien über den Start informieren (Also es wird die Startmethode aufgerufen)
             strategie1.Start(runde, schwere);
             strategie2.Start(runde, schwere);
-            
+
             Console.WriteLine($"Verhör zwischen {strategie1.Name()} und {strategie2.Name()} für {runde} Runden.");
-            
+
             //start
             for (int i = 0; i < runde; i++)
             {
@@ -108,7 +150,7 @@ namespace Gefangenendilemma
                 switch (schwere)
                 {
                     case 0:
-                        VerhoerLeichtPunkte(aktReaktion1,aktReaktion2,ref punkte1,ref punkte2);
+                        VerhoerLeichtPunkte(aktReaktion1, aktReaktion2, ref punkte1, ref punkte2);
                         break;
                     case 1:
                         VerhoerMittelPunkte(aktReaktion1, aktReaktion2, ref punkte1, ref punkte2);
@@ -117,28 +159,12 @@ namespace Gefangenendilemma
                         VerhoerSchwerPunkte(aktReaktion1, aktReaktion2, ref punkte1, ref punkte2);
                         break;
                 }
-                
+
                 //reaktion für den nächsten durchlauf merken
                 reaktion1 = aktReaktion1;
                 reaktion2 = aktReaktion2;
             }
-            
-            //ausgabe
-            Console.WriteLine($"{strategie1.Name()} hat {punkte1} Punkte erhalten.");
-            Console.WriteLine($"{strategie2.Name()} hat {punkte2} Punkte erhalten.");
-            if (punkte1 < punkte2)
-            {
-                Console.WriteLine("Somit hat {0} gewonnen.", strategie1.Name());
-            }
-            else if (punkte1 == punkte2)
-            {
-                Console.WriteLine("Somit steht es unentschieden.");
-            }
-            else
-            {
-                Console.WriteLine("Somit hat {0} gewonnen.", strategie2.Name());
-            }
-            
+
         }
 
         /// <summary>
@@ -155,7 +181,7 @@ namespace Gefangenendilemma
                 punkte1 += 4;
                 punkte2 += 4;
                 return;
-            } 
+            }
             if (aktReaktion1 == BasisStrategie.Verrat && aktReaktion2 == BasisStrategie.Kooperieren)
             {
                 punkte1 += 0;
