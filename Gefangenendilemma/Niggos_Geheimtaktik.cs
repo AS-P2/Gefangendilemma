@@ -70,7 +70,7 @@ namespace Gefangenendilemma
             {
                 if (rounds == 5)                                            // gewinnt hiermit gegen Groll
                 {
-                    if (dieserunde == 5)                                    // && letzteReaktion == Kooperieren
+                    if (dieserunde == 5)
                     {
                         return Verrat;
                     }
