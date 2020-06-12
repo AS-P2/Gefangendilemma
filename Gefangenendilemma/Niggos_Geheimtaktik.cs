@@ -66,9 +66,9 @@ namespace Gefangenendilemma
             {
                 return Kooperieren;
             }
-            if (easy)                                    // gewinnt hiermit gegen Groll auf einfach
+            if (easy)                                   
             {
-                if (rounds == 5)
+                if (rounds == 5)                                            // gewinnt hiermit gegen Groll
                 {
                     if (dieserunde == 5)                                    // && letzteReaktion == Kooperieren
                     {
@@ -126,9 +126,9 @@ namespace Gefangenendilemma
                     }
                 }
             }
-            else if (middle)
+            else if (middle)                
             {
-                if (rounds == 5)
+                if (rounds == 5)                    //gewinnt gegen VerrateImmer
                 {
 
                     nurnochkooperieren = true;      //damit er nicht immer alle if's durchgehen muss
