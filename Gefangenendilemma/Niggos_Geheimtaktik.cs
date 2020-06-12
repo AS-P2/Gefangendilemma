@@ -2,7 +2,7 @@ using Gefangenendilemma.Basis;
 
 namespace Gefangenendilemma
 {
-    public class Strategie2 : BasisStrategie
+    public class Niggos_Geheimtaktik : BasisStrategie
     {
         /// <summary>
         /// Gibt den Namen der Strategie zurück, wichtig zum Anzeigen für die Auswahl
@@ -17,11 +17,6 @@ namespace Gefangenendilemma
         static int dieserunde;
         private bool nurnochkooperieren;
 
-
-        public static void setrundezero()
-        {
-            dieserunde = 0;
-        }
         public override string Name()
         {
             return "Niggos Geheimtaktik";
@@ -56,6 +51,8 @@ namespace Gefangenendilemma
                 hard = true;
             }
             rounds = runde;
+            dieserunde = 0;
+            nurnochkooperieren = false;
         }
 
         /// <summary>
