@@ -67,7 +67,7 @@ namespace Gefangenendilemma
             Console.WriteLine("Wählen Sie ihre 2 Strategien:");
             st1 = VerwaltungKram.EingabeZahlMinMax("Wählen Sie die 1. Strategie", 0, _strategien.Count);
             st2 = VerwaltungKram.EingabeZahlMinMax("Wählen Sie die 2. Strategie", 0, _strategien.Count);
-            spiele = VerwaltungKram.EingabeZahlMinMax("Wie Spiele sollen diese gespielt werden?", 1, 10);
+            spiele = VerwaltungKram.EingabeZahlMinMax("Wie viele Spiele sollen gespielt werden?", 1, 10);
 
             for (int i = 0; i < spiele; ++i)
                 Spiel(i, st1, st2, i == spiele - 1);
@@ -119,8 +119,8 @@ namespace Gefangenendilemma
         /// Startet ein Verhör zwischen der Strategie an der Position st1 und Position st2 über die Länge von runde und der Schwere schwere
         /// </summary>
         /// <param name="spiel"></param>
-        /// <param name="st1"></param>
-        /// <param name="st2"></param>
+        /// <param name="strategie1"></param>
+        /// <param name="strategie2"></param>
         /// <param name="runde"></param>
         /// <param name="schwere"></param>
         /// <param name="punkte1"></param>
